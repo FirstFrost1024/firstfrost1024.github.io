@@ -27,6 +27,7 @@
 	<!--新增体育数据分析页-->
 	<a><span>体育数据分析</span></a>
 	<a><span>体育数据分析</span></a>
+	<a><span>体育数据分析</span></a>
 </aside>	
 <section class="page_one" id="page1">
 	
@@ -295,124 +296,64 @@
 		</div>
 		<div class="lda_vis_wrapper" style="margin-top: 40px;">
 			<h3 style="font-weight: bold;">LDA 主题模型可视化</h3>
-			<iframe src="lda_vis.html" width="100%" height="800" frameborder="0" style="border:1px solid #ccc; border-radius: 8px;"></iframe>
+			<iframe src="lda_vis.html" width="100%" height="600" frameborder="0" style="border:1px solid #ccc; border-radius: 8px;"></iframe>
 		</div>
+
     </div>
 		<div class="down_arrow">
 		<a class="scroll"><span></span></a> 
 	</div>
+	<!--下翻按钮-->
 </section>
 
-<section class="page_seven" id="page7" style="position: relative; padding: 60px 0; background-color: #fafafa;">
-    <div class="con_wrap">
-        <div class="tit_wrap">
-    		<h1 style="font-weight: bold; color: black;">体育数据分析</h1>
- 			<div class="scissors" style="border-top:1px dashed orange;"></div>
-    		<h2 style="color: black;">用数据洞察趋势，用图表呈现价值。</h2>
+<section class="page_seven" id="page7">
+	<!-- 背景 -->
+	<div class="bga"> </div>
+	  <!-- 背景遮罩，可有可无，可以配置穿透颜色 -->
+	  <div class="bga2"></div>
+	<div class="con_wrap">
+		<div class="tit_wrap">
+			<h1 style="font-weight: bold;">体育数据分析</h1>
+			<div class="scissors" style="border-top:1px dashed orange;">
+			</div>
+			<h2>生命,需要我们去努力。年轻时,我们要努力锻炼自己的能力,掌握知识、掌握技能、掌握必要的社会经验。</h2>
+		</div>
+		<div class="lda_vis_wrapper" style="margin-top: 40px;">
+			<h3 style="font-weight: bold;">ip频次出现</h3>
+			<iframe src="rose_chart.html" width="100%" height="600" frameborder="0" style="border:1px solid #ccc; border-radius: 8px;"></iframe>
 		</div>
 
-
-        <!-- 图表控制按钮 -->
-        <div id="buttons" style="text-align: center; margin: 20px 0;">
-            <button onclick="showBarChart()">柱状图</button>
-            <button onclick="showMap()">地图</button>
-        </div>
-
-        <!-- 图表容器 -->
-        <div id="chart" style="width: 100%; height: 80vh; min-height: 500px;"></div>
     </div>
-
-    <script>
-        const chartDom = document.getElementById('chart');
-        const myChart = echarts.init(chartDom);
-
-        let barOption, mapOption;
-        let ipData = [], geoData = [];
-
-        // 动态适应窗口大小
-        window.addEventListener("resize", () => {
-            myChart.resize();
-        });
-
-        // 加载中国地图边界
-        fetch('https://geo.datav.aliyun.com/areas/bound/100000_full.json')
-            .then(res => res.json())
-            .then(geoJson => {
-                echarts.registerMap('china', geoJson);
-
-                fetch('js/ip_count.json')
-                    .then(res => res.json())
-                    .then(barRes => {
-                        ipData = barRes;
-                        fetch('js/ip_geo.json')
-                            .then(res => res.json())
-                            .then(mapRes => {
-                                geoData = mapRes;
-                                renderCharts();
-                            });
-                    });
-            });
-
-        function renderCharts() {
-            barOption = {
-                title: { text: 'IP 出现频次（柱状图）' },
-                tooltip: {},
-                xAxis: {
-                    type: 'category',
-                    data: ipData.map(d => d.ip),
-                    axisLabel: { rotate: 45 }
-                },
-                yAxis: { type: 'value' },
-                series: [{
-                    data: ipData.map(d => d.count),
-                    type: 'bar'
-                }]
-            };
-
-            mapOption = {
-                title: { text: 'IP 地理分布（中国地图）' },
-                tooltip: { trigger: 'item' },
-                visualMap: {
-                    min: 0,
-                    max: Math.max(...geoData.map(d => d.count)),
-                    left: 'left',
-                    top: 'bottom',
-                    text: ['高', '低'],
-                    inRange: { color: ['#e0ffff', '#006edd'] },
-                    calculable: true
-                },
-                series: [{
-                    name: 'IP 频次',
-                    type: 'map',
-                    map: 'china',
-                    roam: true,
-                    data: geoData.map(d => ({ name: d.ip, value: d.count })),
-                    itemStyle: {
-                        areaColor: '#f5f5f5',
-                        borderColor: '#111'
-                    },
-                    emphasis: {
-                        itemStyle: {
-                            areaColor: '#ffd700'
-                        }
-                    }
-                }]
-            };
-
-            showBarChart();
-        }
-
-        function showBarChart() {
-            myChart.setOption(barOption);
-        }
-
-        function showMap() {
-            myChart.setOption(mapOption);
-        }
-    </script>
+		<div class="down_arrow">
+		<a class="scroll"><span></span></a> 
+	</div>
+	<!--下翻按钮-->
 </section>
 
+<section class="page_eight" id="page8">
+	<!-- 背景 -->
+	<div class="bga"> </div>
+	  <!-- 背景遮罩，可有可无，可以配置穿透颜色 -->
+	  <div class="bga2"></div>
+	<div class="con_wrap">
+		<div class="tit_wrap">
+			<h1 style="font-weight: bold;">体育数据分析</h1>
+			<div class="scissors" style="border-top:1px dashed orange;">
+			</div>
+			<h2>生命,需要我们去努力。年轻时,我们要努力锻炼自己的能力,掌握知识、掌握技能、掌握必要的社会经验。</h2>
+		</div>
+		
+		<div class="lda_vis_wrapper" style="margin-top: 40px;">
+			<h3 style="font-weight: bold;">ip趋势图</h3>
+			<iframe src="ip_density_chart_top10_fixed.html" width="100%" height="600" frameborder="0" style="border:1px solid #ccc; border-radius: 8px;"></iframe>
+		</div>
 
+    </div>
+		<div class="down_arrow">
+		<a class="scroll"><span></span></a> 
+	</div>
+	<!--下翻按钮-->
+</section>
 
 
 </body>

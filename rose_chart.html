@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>IP 出现频次南丁格尔玫瑰图</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <style>
+    body {
+      background: #f9f9f9;
+      font-family: 'Microsoft YaHei', sans-serif;
+    }
+    #main {
+      width: 100%;
+      max-width: 1000px;
+      height: 700px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h2>IP 出现频次南丁格尔玫瑰图</h2>
+  <div id="main"></div>
+
+  <script>
+    const chart = echarts.init(document.getElementById('main'));
+
+    fetch('js/ip_count.json')
+      .then(response => response.json())
+      .then(data => {
+        const option = {
+          tooltip: {
+            trigger: 'item',
+            formatter: '{b}：{c} 次 ({d}%)'
+          },
+          legend: {
+            top: 'bottom',
+            data: data.map(item => item.ip)
+          },
+          series: [
+            {
+              name: 'IP 出现频次',
+              type: 'pie',
+              radius: [30, 150],
+              center: ['50%', '50%'],
+              roseType: 'area',
+              itemStyle: {
+                borderRadius: 5
+              },
+              data: data.map(item => ({
+                value: item.count,
+                name: item.ip
+              }))
+            }
+          ]
+        };
+
+        chart.setOption(option);
+        window.addEventListener('resize', chart.resize);
+      })
+      .catch(error => {
+        console.error('加载 ip_count.json 时出错:', error);
+      });
+  </script>
+</body>
+</html>
