@@ -308,7 +308,7 @@ var scrollFunc = function (e) {
 }
 // 给页面绑定滑轮滚动事件
 if (document.addEventListener) {
-    document.addEventListener('DOMMouseScroll', scrollFunc, false);
+    document.addEventListener('DOMMouseScroll', scrollFunc, false); //控制页面滚动事件
 }
 // //滚动滑轮触发scrollFunc方法
 
@@ -317,7 +317,7 @@ var browser = myBrowser();
 if ("IE" == browser) {
     document.onmousewheel = scrollFunc;  
 }else{
-    window.onmousewheel= scrollFunc;  
+    window.onmousewheel= scrollFunc;  //控制页面滚动事件
 }
 
 viewHeight();

@@ -6,6 +6,12 @@
 	<title>杨曦程 - 个人简历,个人主页，个人介绍，个人简介</title>
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        #buttons { margin-bottom: 20px; }
+        #chart { width: 100%; height: 600px; }
+        button { padding: 8px 16px; margin-right: 10px; }
+    </style>
 </head>
 <body oncontextmenu="return false;" onselectstart="return false;" unselectable="on" ondragstart="return false;">
 	<!-- 背景 -->
@@ -19,6 +25,7 @@
 	<a><span>教育经历</span></a>
 	<a><span>项目经验</span></a>
 	<!--新增体育数据分析页-->
+	<a><span>体育数据分析</span></a>
 	<a><span>体育数据分析</span></a>
 </aside>	
 <section class="page_one" id="page1">
@@ -204,6 +211,20 @@
 		      		</div>
 		    	</div>
 		    </div>
+			<div class="programe">
+				<div class="work_time">在读<br>上海体育大学</div>
+		    	<div class="work_text">
+		      		<div class="triangle-left"></div>
+		      		<div class="exCon">
+				        <h4>学习时间：2024/09 -- 至今</h4>
+				        <p>学习技能：我会做网页啦！！！</p>
+				        <p>参加了机器人足球队！我们的老师以及学长学姐都超级友善！！！。</p>
+				        <p>有一个摸鱼社团，至今没见过面hhh；参加了院学生会，摸鱼至今；参加了校学生会，只摸了一个学期；</p>	
+				        <p>参加了好多比赛“中国国际飞行器设计挑战赛”“Robocup机器人世界杯”“计算机应用能力大赛”balabala~</p>
+						<p>最后是一个稀里糊涂的我TT 没做好备份导致两天的工作打水漂了TT</p>	
+		      		</div>
+		    	</div>
+		    </div>
 		</div>
     </div>
 	<div class="down_arrow">
@@ -259,6 +280,7 @@
 </section>
 
 <!--体育数据分析页-->
+
 <section class="page_six" id="page6">
 	<!-- 背景 -->
 	<div class="bga"> </div>
@@ -271,44 +293,126 @@
 			</div>
 			<h2>生命,需要我们去努力。年轻时,我们要努力锻炼自己的能力,掌握知识、掌握技能、掌握必要的社会经验。</h2>
 		</div>
-	  	<!-- <div class="work_con">
-	  		<div class="programe">
-		    	<div class="work_time">24个月<br>Robocup VEX机器人</div>
-			    <div class="work_text">
-			      	<div class="triangle-left"></div>
-			      	<div class="exCon">
-				        <h4>开发时间：2021 /09--2023 /09</h4>
-				        <h5>开发工具：CPP，Solidworks，Inventor</h5>
-				        <p>项目描述：</p>
-				        <p>根据赛事规定，研发机器人工程结构，并加工制造，参与机器人自动化算法设计，制定自动化策略。</p>
-				        <p> 1.数据信息调查，2.软硬件交互开发，3.数据解析。</p>       
-					</div>
-			    </div> 
-			</div>
-			<div class="programe">
-				<div class="work_time">12个月<br>基于Arduino的辅助牵引助力装置</div>
-		    	<div class="work_text">
-		      		<div class="triangle-left"></div>
-		      		<div class="exCon">
-				        <h4>开发时间：2021 /09--2022 /09</h4>
-				        <h5>开发工具：Arduino IDE,AutoCAD,Inventor</h5>
-				        <p>项目描述：</p>
-				        <p>参与市场调查，社会背景调研，负责项目装置的设计与开发，完成算法与功能实现。 </p>
-				        <p>1.社会背景信息 2.市场背景信息 3.用户信息 4.软硬件交互 5.调试工具等5个部分。</p>	
-				        
-		      		</div>
-		    	</div>
-		    </div>
-		</div> -->
 		<div class="lda_vis_wrapper" style="margin-top: 40px;">
 			<h3 style="font-weight: bold;">LDA 主题模型可视化</h3>
 			<iframe src="lda_vis.html" width="100%" height="800" frameborder="0" style="border:1px solid #ccc; border-radius: 8px;"></iframe>
 		</div>
-
-		
-
     </div>
+		<div class="down_arrow">
+		<a class="scroll"><span></span></a> 
+	</div>
 </section>
+
+<section class="page_seven" id="page7" style="position: relative; padding: 60px 0; background-color: #fafafa;">
+    <div class="con_wrap">
+        <div class="tit_wrap">
+    		<h1 style="font-weight: bold; color: black;">体育数据分析</h1>
+ 			<div class="scissors" style="border-top:1px dashed orange;"></div>
+    		<h2 style="color: black;">用数据洞察趋势，用图表呈现价值。</h2>
+		</div>
+
+
+        <!-- 图表控制按钮 -->
+        <div id="buttons" style="text-align: center; margin: 20px 0;">
+            <button onclick="showBarChart()">柱状图</button>
+            <button onclick="showMap()">地图</button>
+        </div>
+
+        <!-- 图表容器 -->
+        <div id="chart" style="width: 100%; height: 80vh; min-height: 500px;"></div>
+    </div>
+
+    <script>
+        const chartDom = document.getElementById('chart');
+        const myChart = echarts.init(chartDom);
+
+        let barOption, mapOption;
+        let ipData = [], geoData = [];
+
+        // 动态适应窗口大小
+        window.addEventListener("resize", () => {
+            myChart.resize();
+        });
+
+        // 加载中国地图边界
+        fetch('https://geo.datav.aliyun.com/areas/bound/100000_full.json')
+            .then(res => res.json())
+            .then(geoJson => {
+                echarts.registerMap('china', geoJson);
+
+                fetch('js/ip_count.json')
+                    .then(res => res.json())
+                    .then(barRes => {
+                        ipData = barRes;
+                        fetch('js/ip_geo.json')
+                            .then(res => res.json())
+                            .then(mapRes => {
+                                geoData = mapRes;
+                                renderCharts();
+                            });
+                    });
+            });
+
+        function renderCharts() {
+            barOption = {
+                title: { text: 'IP 出现频次（柱状图）' },
+                tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    data: ipData.map(d => d.ip),
+                    axisLabel: { rotate: 45 }
+                },
+                yAxis: { type: 'value' },
+                series: [{
+                    data: ipData.map(d => d.count),
+                    type: 'bar'
+                }]
+            };
+
+            mapOption = {
+                title: { text: 'IP 地理分布（中国地图）' },
+                tooltip: { trigger: 'item' },
+                visualMap: {
+                    min: 0,
+                    max: Math.max(...geoData.map(d => d.count)),
+                    left: 'left',
+                    top: 'bottom',
+                    text: ['高', '低'],
+                    inRange: { color: ['#e0ffff', '#006edd'] },
+                    calculable: true
+                },
+                series: [{
+                    name: 'IP 频次',
+                    type: 'map',
+                    map: 'china',
+                    roam: true,
+                    data: geoData.map(d => ({ name: d.ip, value: d.count })),
+                    itemStyle: {
+                        areaColor: '#f5f5f5',
+                        borderColor: '#111'
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            areaColor: '#ffd700'
+                        }
+                    }
+                }]
+            };
+
+            showBarChart();
+        }
+
+        function showBarChart() {
+            myChart.setOption(barOption);
+        }
+
+        function showMap() {
+            myChart.setOption(mapOption);
+        }
+    </script>
+</section>
+
+
 
 
 </body>

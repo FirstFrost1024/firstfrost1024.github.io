@@ -486,7 +486,7 @@ section.page_one {
 	animation:0.4s myscale 1;
 	color:#fff
 }
-section.page_two .con_wrap,section.page_three .con_wrap,section.page_four .con_wrap,section.page_five .con_wrap,section.page_six .con_wrap,section.page_seven .con_wrap {
+section.page_two .con_wrap,section.page_three .con_wrap,section.page_four .con_wrap,section.page_five .con_wrap,section.page_six .con_wrap,section.page_seven .con_wrap,section.page_eight .con_wrap {
 	transform:translateY(200px);
 	-ms-transform:translateY(200px);
 	-moz-transform:translateY(200px);
@@ -517,6 +517,9 @@ section.page_two .con_wrap,section.page_three .con_wrap,section.page_four .con_w
 	display:none;
 }
 .page_six {
+	display:none;
+}
+.page_seven {
 	display:none;
 }
 .con_wrap {
